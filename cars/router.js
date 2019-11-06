@@ -25,8 +25,8 @@ router.post('/', async (req, res, next) => {
   const { VIN, make, model, mileage, transmissionType, statusOfTitle } = req.body;
 
   try {
-    const car = await db.insert({ VIN, make, model, mileage, transmissionType, statusOfTitle });
-    res.status(200).json(car);
+    const cars = await db.insert({ VIN, make, model, mileage, transmissionType, statusOfTitle });
+    res.status(200).json(`A new car was created with an id of ${cars[0]}`);
   } catch (error) {
     next(error);
   }
@@ -34,10 +34,10 @@ router.post('/', async (req, res, next) => {
 
 router.use((error, req, res) => {
   res.status(500).json({
-      file: 'router',
-      method: req.method,
-      url: req.url,
-      message: error.message
+    file: 'router',
+    method: req.method,
+    url: req.url,
+    message: `this went wrong: ${error.message}`
   })
 })
   
