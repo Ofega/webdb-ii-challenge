@@ -7,8 +7,8 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
+server.use('/api/cars', require('../cars/router'));
 
-// server.use('/api/cars', require('../cars/carsRouter'));
 
 server.get('/', (req, res) => {
     res.send('Welcome to the Cars API');
